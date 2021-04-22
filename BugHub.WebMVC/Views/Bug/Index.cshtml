@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BugHub.Models.BugListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<style>
+    p{
+        color:orange;
+    }
+    
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BugId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BugTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedUtc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BugId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BugTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedUtc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.BugId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BugId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BugId })
+        </td>
+    </tr>
+}
+
+</table>
