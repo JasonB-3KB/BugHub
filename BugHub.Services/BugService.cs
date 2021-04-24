@@ -25,10 +25,10 @@ namespace BugHub.Services
                     OwnerId = _userId,
                     BugTitle = model.BugTitle,
                     BugDescription = model.BugDescription,
-                    //BugStatus = model.BugStatus,
-                    //BugPriority = model.BugPriority,
-                    //BugType = model.BugType,
-                    //Employee = model.Employee.EmployeeId,
+                    BugStatus = model.BugStatus,
+                    BugPriority = model.BugPriority,
+                    BugType = model.BugType,
+                    EmployeeId = model.EmployeeId,
                     CreatedUtc = DateTimeOffset.Now
                 };
 
@@ -52,14 +52,47 @@ namespace BugHub.Services
                         {
                             BugId = e.BugId,
                             BugTitle = e.BugTitle,
-                            //BugStatus = e.BugStatus,
-                            //BugPriority = e.BugPriority,
-                            //BugType = e.BugType,
-                            //EmployeeId = e.Employee.EmployeeId,
+                            BugStatus = e.BugStatus,
+                            BugPriority = e.BugPriority,
+                            BugType = e.BugType,
+                            EmployeeId = e.Project.EmployeeId,
                             CreatedUtc = e.CreatedUtc
                         }
                         );
                 return query.ToArray();
+            }
+        }
+
+        public IEnumerable<Employee> GetEmployeeList()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                return ctx.Employees.ToList();
+            }
+        }
+
+
+        public BugDetail GetBugById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Bugs
+                    .Single(e => e.BugId == id && e.OwnerId == _userId);
+                return
+                    new BugDetail
+                    {
+                        BugId = entity.BugId,
+                        BugTitle = entity.BugTitle,
+                        BugDescription = entity.BugDescription,
+                        BugStatus = entity.BugStatus,
+                        BugPriority = entity.BugPriority,
+                        BugType = entity.BugType,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                        
+                    };
             }
         }
     }

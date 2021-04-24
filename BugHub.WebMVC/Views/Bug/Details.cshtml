@@ -1,0 +1,66 @@
+﻿@model BugHub.Models.BugDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BugDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BugId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BugId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BugTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BugTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BugDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BugDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedUtc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BugId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

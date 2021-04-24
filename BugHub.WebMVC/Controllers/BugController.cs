@@ -1,4 +1,5 @@
-﻿using BugHub.Models;
+﻿using BugHub.Data;
+using BugHub.Models;
 using BugHub.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -26,6 +27,19 @@ namespace BugHub.WebMVC.Controllers
         //Get
         public ActionResult Create()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new BugService(userId);
+
+            List<Employee> employees = service.GetEmployeeList().ToList();
+
+            var query = from e in employees
+                                select new SelectListItem()
+                                {
+                                  Value = e.EmployeeId.ToString(),
+                                    Text = e.LastName,
+                                    
+                                };
+            ViewBag.EmployeeId = query;
             return View();
         }
 
@@ -33,18 +47,33 @@ namespace BugHub.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BugCreate model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) return View(model);
+            
+            var service = CreateBugService();
+
+            if (service.CreateBug(model))
             {
-                return View(model);
-            }
+                TempData["SaveResult"] = "Your Bug ticket was created.";
+                return RedirectToAction("Index");
+            };
 
+            ModelState.AddModelError("", "A Bug ticket could not be created.");
 
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateBugService();
+            var model = svc.GetBugById(id);
+
+            return View(model);
+        }
+        private BugService CreateBugService()
+        {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new BugService(userId);
-
-            service.CreateBug(model);
-
-            return RedirectToAction("Index");
+            return service;
         }
     }
 }

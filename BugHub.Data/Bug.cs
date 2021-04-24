@@ -21,6 +21,8 @@ namespace BugHub.Data
         public string BugTitle { get; set; }
         [Required]
         public string BugDescription { get; set; }
+        [Required]
+        public int EmployeeId { get; set; }
 
         [ForeignKey(nameof(Project))]
         public int ProjectId { get; set; }

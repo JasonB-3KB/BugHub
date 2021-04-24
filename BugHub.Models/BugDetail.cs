@@ -2,28 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BugHub.Models
 {
-    public class BugCreate
+    public class BugDetail
     {
-        [Required]
+        public int BugId { get; set; }
         public string BugTitle { get; set; }
         public string BugDescription { get; set; }
-
-        [ForeignKey(nameof(Employee))]
         public int EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
-        [Required]
         public BugStatus BugStatus { get; set; }
-        [Required]
         public BugPriority BugPriority { get; set; }
-        [Required]
         public BugType BugType { get; set; }
-        
+
+        [Display(Name="Created")]
+        public DateTimeOffset CreatedUtc { get; set; }
+        [Display(Name="Modified")]
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

@@ -35,6 +35,7 @@ namespace BugHub.Data
         public DbSet<Bug> Bugs { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
