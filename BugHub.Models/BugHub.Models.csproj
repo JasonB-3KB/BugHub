@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BugCreate.cs" />
     <Compile Include="BugDetail.cs" />
+    <Compile Include="BugEdit.cs" />
     <Compile Include="BugListItem.cs" />
     <Compile Include="EmployeeCreate.cs" />
     <Compile Include="EmployeeListItem.cs" />

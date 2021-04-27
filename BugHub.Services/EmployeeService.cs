@@ -44,7 +44,7 @@ namespace BugHub.Services
                 var query =
                     ctx
                     .Employees
-                    .Where(e => e.OwnerId == _userId)
+                    //.Where(e => e.OwnerId == _userId)
                     .Select(
                         e =>
                         new EmployeeListItem
@@ -60,6 +60,12 @@ namespace BugHub.Services
                 return query.ToArray();
             }
         }
-        
+        public IEnumerable<Employee> GetEmployeeList()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                return ctx.Employees.ToList();
+            }
+        }
     }
 }

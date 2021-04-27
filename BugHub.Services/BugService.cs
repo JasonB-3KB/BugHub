@@ -29,7 +29,8 @@ namespace BugHub.Services
                     BugPriority = model.BugPriority,
                     BugType = model.BugType,
                     EmployeeId = model.EmployeeId,
-                    CreatedUtc = DateTimeOffset.Now
+                    CreatedUtc = DateTimeOffset.Now,
+                    ProjectId = 6
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -93,6 +94,26 @@ namespace BugHub.Services
                         ModifiedUtc = entity.ModifiedUtc
                         
                     };
+            }
+
+        }
+        public bool UpdateBug(BugEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Bugs
+                    .Single(e => e.BugId == model.BugId && e.OwnerId == _userId);
+
+                entity.BugTitle = model.BugTitle;
+                entity.BugDescription = model.BugDescription;
+                entity.BugStatus = model.BugStatus;
+                entity.BugPriority = model.BugPriority;
+                entity.BugType = model.BugType;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

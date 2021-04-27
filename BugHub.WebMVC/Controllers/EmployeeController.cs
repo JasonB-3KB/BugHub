@@ -1,4 +1,5 @@
-﻿using BugHub.Models;
+﻿using BugHub.Data;
+using BugHub.Models;
 using BugHub.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -17,26 +18,29 @@ namespace BugHub.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new EmployeeService(userId);
+            List<Employee> employees = service.GetEmployeeList().ToList();
             var model = service.GetEmployees();
             return View(model);
         }
 
         public ActionResult Create()
         {
+
             return View();
         }
 
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmployeeCreate model)
         {
-            if (ModelState.IsValid) return View(model);            
+            if (!ModelState.IsValid) return View(model);            
 
             var service = CreateEmployeeService();
 
             if (service.CreateEmployee(model))
             {
-                TempData["SaveResult"] = "New Employee Created.";
+                TempData["SaveResult"] = "Employee Added.";
                 return RedirectToAction("Index");
             };
 

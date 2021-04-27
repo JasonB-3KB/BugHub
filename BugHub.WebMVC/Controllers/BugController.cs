@@ -28,18 +28,16 @@ namespace BugHub.WebMVC.Controllers
         public ActionResult Create()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new BugService(userId);
+            var service = new EmployeeService(userId);
 
             List<Employee> employees = service.GetEmployeeList().ToList();
 
-            var query = from e in employees
-                                select new SelectListItem()
-                                {
-                                  Value = e.EmployeeId.ToString(),
-                                    Text = e.LastName,
-                                    
-                                };
-            ViewBag.EmployeeId = query;
+            ViewData["EmployeeId"] = service.GetEmployees().Select(e => new SelectListItem
+            {
+                Text = e.FirstName + "  " + e.LastName,
+                Value = e.EmployeeId.ToString()
+            });
+
             return View();
         }
 
@@ -47,15 +45,25 @@ namespace BugHub.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BugCreate model)
         {
-            if (ModelState.IsValid) return View(model);
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service2 = new EmployeeService(userId);
+
+            ViewData["EmployeeId"] = service2.GetEmployees().Select(e => new SelectListItem
+            {
+                Text = e.FirstName + "  " + e.LastName,
+                Value = e.EmployeeId.ToString()
+            });
+
+            if (!ModelState.IsValid) return View(model);
             
             var service = CreateBugService();
-
             if (service.CreateBug(model))
             {
                 TempData["SaveResult"] = "Your Bug ticket was created.";
                 return RedirectToAction("Index");
             };
+            
+
 
             ModelState.AddModelError("", "A Bug ticket could not be created.");
 
@@ -69,11 +77,29 @@ namespace BugHub.WebMVC.Controllers
 
             return View(model);
         }
+
         private BugService CreateBugService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new BugService(userId);
             return service;
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var service = CreateBugService();
+            var detail = service.GetBugById(id);
+            var model =
+                new BugEdit
+                {
+                    BugId = detail.BugId,
+                    BugTitle = detail.BugTitle,
+                    BugDescription = detail.BugDescription,
+                    BugStatus = detail.BugStatus,
+                    BugPriority = detail.BugPriority,
+                    BugType = detail.BugType
+                };
+            return View(model);
         }
     }
 }

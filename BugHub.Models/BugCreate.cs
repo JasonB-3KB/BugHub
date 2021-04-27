@@ -12,6 +12,8 @@ namespace BugHub.Models
     public class BugCreate
     {
         [Required]
+        public Guid OwnerId { get; set; }
+        [Required]
         public string BugTitle { get; set; }
         public string BugDescription { get; set; }
 

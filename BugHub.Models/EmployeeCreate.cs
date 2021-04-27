@@ -11,6 +11,8 @@ namespace BugHub.Models
     public class EmployeeCreate
     {
         [Required]
+        public Guid OwnerId { get; set; }
+        [Required]
         public string EmployeeEmail { get; set; }
         [Required]
         public EmployeeRole EmployeeRole { get; set; }
@@ -18,5 +20,6 @@ namespace BugHub.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public DateTimeOffset CreatedUtc { get; set; }
     }
 }
