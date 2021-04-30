@@ -67,5 +67,27 @@ namespace BugHub.Services
                 return ctx.Employees.ToList();
             }
         }
+
+        public EmployeeDetail GetEmployeeById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Employees
+                    .Single(e => e.EmployeeId == id && e.OwnerId == _userId);
+                return
+                    new EmployeeDetail
+                    {
+                        EmployeeId = entity.EmployeeId,
+                        EmployeeEmail = entity.EmployeeEmail,
+                        EmployeeRole = entity.EmployeeRole,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
     }
 }

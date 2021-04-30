@@ -62,7 +62,10 @@
     <Compile Include="BugEdit.cs" />
     <Compile Include="BugListItem.cs" />
     <Compile Include="EmployeeCreate.cs" />
+    <Compile Include="EmployeeDetail.cs" />
     <Compile Include="EmployeeListItem.cs" />
+    <Compile Include="ProjectCreate.cs" />
+    <Compile Include="ProjectListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

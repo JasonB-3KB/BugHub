@@ -116,5 +116,20 @@ namespace BugHub.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteBug(int bugId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Bugs
+                    .Single(e => e.BugId == bugId && e.OwnerId == _userId);
+
+                ctx.Bugs.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

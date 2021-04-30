@@ -61,8 +61,7 @@ namespace BugHub.WebMVC.Controllers
             {
                 TempData["SaveResult"] = "Your Bug ticket was created.";
                 return RedirectToAction("Index");
-            };
-            
+            };            
 
 
             ModelState.AddModelError("", "A Bug ticket could not be created.");
@@ -100,6 +99,50 @@ namespace BugHub.WebMVC.Controllers
                     BugType = detail.BugType
                 };
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, BugEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if(model.BugId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateBugService();
+
+            if (service.UpdateBug(model))
+            {
+                TempData["SaveResult"] = "Your Bug was updated.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Your Bug could not be updated.");
+            return View(model);
+        }
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateBugService();
+            var model = svc.GetBugById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateBugService();
+
+            service.DeleteBug(id);
+
+            TempData["SaveResult"] = "Your Bug was deleted";
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -24,6 +24,7 @@ namespace BugHub.Data
         [Required]
         public string LastName { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 
     

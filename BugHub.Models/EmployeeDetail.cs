@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BugHub.Models
 {
-    public class EmployeeListItem
+    public class EmployeeDetail
     {
         public int EmployeeId { get; set; }
         public string EmployeeEmail { get; set; }
@@ -16,8 +16,9 @@ namespace BugHub.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [Display(Name="Date Employee was Added")]
+        [Display(Name = "Employee Added")]
         public DateTimeOffset CreatedUtc { get; set; }
-        
+        [Display(Name = "Employee Modified")]
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

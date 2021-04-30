@@ -49,6 +49,13 @@ namespace BugHub.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int id)
+        {
+            var svc = CreateEmployeeService();
+            var model = svc.GetEmployeeById(id);
+
+            return View(model);
+        }
         private EmployeeService CreateEmployeeService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
