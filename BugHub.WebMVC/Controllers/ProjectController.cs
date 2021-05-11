@@ -69,13 +69,13 @@ namespace BugHub.WebMVC.Controllers
             
         }
 
-        //public ActionResult Details(int id)
-        //{
-        //    var svc = CreateProjectService();
-        //    var model = svc.GetProjectById(id);
+        public ActionResult Details(int id)
+        {
+            var svc = CreateProjectService();
+            var model = svc.GetProjectById(id);
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
         private ProjectService CreateProjectService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

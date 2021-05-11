@@ -63,5 +63,24 @@ namespace BugHub.Services
                 return ctx.Projects.ToList();
             }
         }
+        public ProjectDetail GetProjectById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Projects
+                    .Single(e => e.ProjectId == id && e.OwnerId == _userId);
+                return
+                    new ProjectDetail
+                    {
+                        ProjectId = entity.ProjectId,
+                        ProjectName = entity.ProjectName,
+                        EmployeeId = entity.EmployeeId,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
     }
 }
