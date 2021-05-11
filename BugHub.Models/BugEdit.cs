@@ -12,6 +12,8 @@ namespace BugHub.Models
         public int BugId { get; set; }
         public string BugTitle { get; set; }
         public string BugDescription { get; set; }
+        public int EmployeeId { get; set; }
+        public int ProjectId { get; set; }
 
         public BugStatus BugStatus { get; set; }
         

@@ -3,81 +3,109 @@
 @{
     ViewBag.Title = "Details";
 }
+<style>
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
+    }
 
-<h2>Details</h2>
+    a:visited {
+        color: black;
+    }
 
-<div>
-    <h4>BugDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    a:link {
+        color: darkmagenta;
+    }
+
+    a:hover {
+        color: floralwhite;
+    }
+</style>
+<h2>Bug Ticket Details</h2>
+<body class="background"></body>
+    <div>
+        @*<h4>BugDetail</h4>*@
+        <hr />
+        <dl class="dl-horizontal">
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BugTitle)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BugTitle)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BugTitle)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BugTitle)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BugDescription)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BugDescription)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BugDescription)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BugDescription)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeId)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedUtc)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ProjectId)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedUtc)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedUtc)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedUtc)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BugStatus)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedUtc)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BugStatus)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedUtc)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BugPriority)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BugStatus)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BugPriority)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BugStatus)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BugType)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BugPriority)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BugType)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BugId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.BugPriority)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BugType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BugType)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BugId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

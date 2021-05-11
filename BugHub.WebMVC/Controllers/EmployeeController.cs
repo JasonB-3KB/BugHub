@@ -62,5 +62,56 @@ namespace BugHub.WebMVC.Controllers
             var service = new EmployeeService(userId);
             return service;
         }
+
+        public ActionResult Edit(int id)
+        {
+            var service = CreateEmployeeService();
+            var detail = service.GetEmployeeById(id);
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var pservice = new ProjectService(userId);
+
+            List<Project> projects = pservice.GetProjectList().ToList();
+
+            ViewData["ProjectId"] = pservice.GetProjects().Select(e => new SelectListItem
+            {
+                Text = e.ProjectName,
+                Value = e.ProjectId.ToString()
+            });
+
+            var model =
+                new EmployeeEdit
+                {
+                    EmployeeId = detail.EmployeeId,
+                    EmployeeEmail = detail.EmployeeEmail,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    ProjectId = detail.ProjectId
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EmployeeEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if(model.EmployeeId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateEmployeeService();
+
+            if (service.UpdateEmployee(model))
+            {
+                TempData["SaveResult"] = "Employee was Updated.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Employee could not be Updated.");
+            return View(model);
+        }
     }
 }

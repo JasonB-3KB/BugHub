@@ -3,9 +3,29 @@
 @{
     ViewBag.Title = "Create";
 }
+<style>
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
+    }
 
+    a:visited {
+        color: black;
+    }
+
+    a:link {
+        color: darkmagenta;
+    }
+
+    a:hover {
+        color: floralwhite;
+    }
+</style>
 <h2>Create</h2>
-
+<body class="background"></body>
 
 @using (Html.BeginForm()) 
 {

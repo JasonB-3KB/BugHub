@@ -16,6 +16,7 @@ namespace BugHub.Models
         [Required]
         public string BugTitle { get; set; }
         public string BugDescription { get; set; }
+        public int ProjectId { get; set; }
 
         [ForeignKey(nameof(Employee))]
         public int EmployeeId { get; set; }

@@ -1,7 +1,34 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<style>
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
+    }
 
-<p>Use this area to provide additional information.</p>
+    a:visited {
+        color: black;
+    }
+
+    a:link {
+        color: darkmagenta;
+    }
+
+    a:hover {
+        color: floralwhite;
+    }
+    p {
+        font-size:25px;
+    }
+</style>
+<h2>@ViewBag.Title.</h2>
+@*<h3>@ViewBag.Message</h3>*@
+<body class="background"></body>
+<p>This program was engineered in a spider's digital web.</p>
+   <p> Designed from the ground up to create a tracker for a Bug.</p>
+   <p> Then follow it..... </p>
+    <p>Until it is squashed.</p>

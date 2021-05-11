@@ -3,11 +3,31 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
+    }
+    
+    a:visited {
+        color: black;
+    }
 
-<h2>Index</h2>
+    a:link {
+        color:darkmagenta;
+    }
 
+    a:hover {
+        color: floralwhite;
+    }
+    </style>
+<h2>Employee List</h2>
+<body class="background"></body>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add New Employee", "Create")
 </p>
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -21,9 +41,9 @@
 }
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.EmployeeId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.EmployeeEmail)
         </th>
@@ -44,9 +64,9 @@
 
 @foreach (var item in Model) {
 <tr>
-    <td>
+    @*<td>
         @Html.DisplayFor(modelItem => item.EmployeeId)
-    </td>
+    </td>*@
     <td>
         @Html.DisplayFor(modelItem => item.EmployeeEmail)
     </td>

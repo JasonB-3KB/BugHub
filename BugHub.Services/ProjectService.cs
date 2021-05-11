@@ -56,11 +56,11 @@ namespace BugHub.Services
                 return query.ToArray();
             }
         }
-        public IEnumerable<Employee> GetEmployeeList()
+        public IEnumerable<Project> GetProjectList()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                return ctx.Employees.ToList();
+                return ctx.Projects.ToList();
             }
         }
     }

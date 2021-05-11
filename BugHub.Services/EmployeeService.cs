@@ -67,6 +67,13 @@ namespace BugHub.Services
                 return ctx.Employees.ToList();
             }
         }
+        //public IEnumerable<Project> GetProjectList()
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        return ctx.Projects.ToList();
+        //    }
+        //}
 
         public EmployeeDetail GetEmployeeById(int id)
         {
@@ -84,9 +91,30 @@ namespace BugHub.Services
                         EmployeeRole = entity.EmployeeRole,
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
+                        ProjectId = entity.ProjectId,
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc
                     };
+            }
+        }
+
+        public bool UpdateEmployee(EmployeeEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Employees
+                    .Single(e => e.EmployeeId == model.EmployeeId && e.OwnerId == _userId);
+
+                entity.EmployeeEmail = model.EmployeeEmail;
+                entity.EmployeeRole = model.EmployeeRole;
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.ProjectId = model.ProjectId;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

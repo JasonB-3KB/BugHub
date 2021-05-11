@@ -19,8 +19,15 @@ namespace BugHub.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new BugService(userId);
+            var eservice = new EmployeeService(userId);
             var model = service.GetBugs();
 
+            List<Employee> employees = eservice.GetEmployeeList().ToList();
+              ViewData["EmployeeId"] = eservice.GetEmployees().Select(e => new SelectListItem
+            {
+                Text = e.FirstName.ToString() + "  " + e.LastName,
+                Value = e.EmployeeId.ToString()
+            }) ;
             return View(model);
         }
 
@@ -28,14 +35,22 @@ namespace BugHub.WebMVC.Controllers
         public ActionResult Create()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new EmployeeService(userId);
+            var eservice = new EmployeeService(userId);
+            var pservice = new ProjectService(userId);
 
-            List<Employee> employees = service.GetEmployeeList().ToList();
+            List<Employee> employees = eservice.GetEmployeeList().ToList();
+            List<Project> projects = pservice.GetProjectList().ToList();
 
-            ViewData["EmployeeId"] = service.GetEmployees().Select(e => new SelectListItem
+            ViewData["EmployeeId"] = eservice.GetEmployees().Select(e => new SelectListItem
             {
                 Text = e.FirstName + "  " + e.LastName,
                 Value = e.EmployeeId.ToString()
+            });
+
+            ViewData["ProjectId"] = pservice.GetProjects().Select(e => new SelectListItem
+            {
+                Text = e.ProjectName,
+                Value = e.ProjectId.ToString()
             });
 
             return View();
@@ -47,11 +62,18 @@ namespace BugHub.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service2 = new EmployeeService(userId);
+            var pservice2 = new ProjectService(userId);
 
             ViewData["EmployeeId"] = service2.GetEmployees().Select(e => new SelectListItem
             {
                 Text = e.FirstName + "  " + e.LastName,
                 Value = e.EmployeeId.ToString()
+            });
+
+            ViewData["ProjectId"] = pservice2.GetProjects().Select(e => new SelectListItem
+            {
+                Text = e.ProjectName,
+                Value = e.ProjectId.ToString()
             });
 
             if (!ModelState.IsValid) return View(model);
@@ -88,12 +110,33 @@ namespace BugHub.WebMVC.Controllers
         {
             var service = CreateBugService();
             var detail = service.GetBugById(id);
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var eservice = new EmployeeService(userId);
+            var pservice = new ProjectService(userId);
+
+            List<Employee> employees = eservice.GetEmployeeList().ToList();
+            List<Project> projects = pservice.GetProjectList().ToList();
+
+            ViewData["EmployeeId"] = eservice.GetEmployees().Select(e => new SelectListItem
+            {
+                Text = e.FirstName + "  " + e.LastName,
+                Value = e.EmployeeId.ToString()
+            });
+
+            ViewData["ProjectId"] = pservice.GetProjects().Select(e => new SelectListItem
+            {
+                Text = e.ProjectName,
+                Value = e.ProjectId.ToString()
+            });
             var model =
                 new BugEdit
                 {
                     BugId = detail.BugId,
                     BugTitle = detail.BugTitle,
                     BugDescription = detail.BugDescription,
+                    EmployeeId = detail.EmployeeId,
+                    ProjectId = detail.ProjectId,
                     BugStatus = detail.BugStatus,
                     BugPriority = detail.BugPriority,
                     BugType = detail.BugType

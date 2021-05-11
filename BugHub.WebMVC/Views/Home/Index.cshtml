@@ -5,15 +5,15 @@
 <style>
     #HomePageBody {
 
-        
+        display:flex;
         background-image: url('../../Content/CodeSpiderFinal.png');
         background-size: cover;
-        /*background-position: center;*/
+        background-position: center;
         background-repeat: no-repeat;
         margin: auto;
     }
     .jumbotron {
-        padding-top: 150px;
+        padding-top: 100px;
         background: transparent;
         color:fuchsia;
     }
@@ -21,8 +21,11 @@
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .row{
-        padding-top:500px;
+        padding-top:400px;
         color:fuchsia;
+    }
+    p {
+        font-size:large;
     }
     
 </style>
@@ -30,7 +33,7 @@
 <div class="jumbotron">
     <h1>BugHub</h1>
     <p class="lead">Keep track of any and all bugs with the new bug tracker BUGHUB!</p>
-    <p><a href="https://asp.net" class="btn-outline-dark btn-lg">Get Started &raquo;</a></p>
+    
 </div>
 
 <div class="row">
@@ -39,17 +42,17 @@
         <p>
             Find all Bug Tickets here.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Create A Bug Ticket &raquo;</a></p>
+        <p><a class="btn btn-default" href="~/Bug/Index">Create A Bug Ticket &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Projects</h2>
         <p>Find all Development Projects here.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">List of Projects &raquo;</a></p>
+        <p><a class="btn btn-default" href="/Project/Index">List of Projects &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Employees</h2>
         <p>Access to all Employees.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">List of Employees &raquo;</a></p>
+        <p><a class="btn btn-default" href="/Employee/Index">List of Employees &raquo;</a></p>
     </div>
 </div>
 </body>

@@ -25,12 +25,13 @@ namespace BugHub.Services
                     OwnerId = _userId,
                     BugTitle = model.BugTitle,
                     BugDescription = model.BugDescription,
+                    ProjectId = model.ProjectId,
                     BugStatus = model.BugStatus,
                     BugPriority = model.BugPriority,
                     BugType = model.BugType,
                     EmployeeId = model.EmployeeId,
                     CreatedUtc = DateTimeOffset.Now,
-                    ProjectId = 6
+                    
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -64,13 +65,13 @@ namespace BugHub.Services
             }
         }
 
-        public IEnumerable<Employee> GetEmployeeList()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                return ctx.Employees.ToList();
-            }
-        }
+        //public IEnumerable<Employee> GetEmployeeList()
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        return ctx.Employees.ToList();
+        //    }
+        //}
 
 
         public BugDetail GetBugById(int id)
@@ -87,6 +88,8 @@ namespace BugHub.Services
                         BugId = entity.BugId,
                         BugTitle = entity.BugTitle,
                         BugDescription = entity.BugDescription,
+                        EmployeeId = entity.EmployeeId,
+                        ProjectId = entity.ProjectId,
                         BugStatus = entity.BugStatus,
                         BugPriority = entity.BugPriority,
                         BugType = entity.BugType,

@@ -1,17 +1,34 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
+<style>
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    a:link {
+        color: darkmagenta;
+    }
+
+    a:hover {
+        color: floralwhite;
+    }
+</style>
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
+@*<h3>@ViewBag.Message</h3>*@
+<body class="background"></body>
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
+    One Bug Way<br />
+    CyberCity, CS 12345<br />
+    <abbr title="Email">E:</abbr>
+    3KBProductions@gmail.com
 </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>

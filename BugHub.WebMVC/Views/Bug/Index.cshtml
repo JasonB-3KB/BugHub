@@ -3,21 +3,31 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
 <style>
-    background {
-        background-image: linear-gradient(to top, black, gray);
+    .background {
+        background-size: cover;
+        background-image: linear-gradient(to top, black, lightgray);
+        height: 100vh;
+        color: black;
+        font-size: large;
     }
 
-    .table{
-        
-        color:black;
+    a:visited {
+        color: darkmagenta;
     }
-    
+
+    a:link {
+        color: black;
+    }
+
+    a:hover {
+        color: darkcyan;
+    }
 </style>
+<h2>Bug List</h2>
+<body class="background"></body>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Bug Tracker Ticket", "Create")
 </p>
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -31,9 +41,9 @@
 }
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.BugId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BugTitle)
         </th>
@@ -48,14 +58,14 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.BugId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.BugTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
+            @Html.DisplayFor(modelItem => item.EmployeeId, ViewData["EmployeeId"] as IEnumerableValueProvider)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedUtc)
