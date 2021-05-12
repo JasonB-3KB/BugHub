@@ -82,5 +82,36 @@ namespace BugHub.Services
                     };
             }
         }
+        public bool UpdateProject(ProjectEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Projects
+                    .Single(e => e.ProjectId == model.ProjectId && e.OwnerId == _userId);
+
+                entity.ProjectName = model.ProjectName;
+                entity.EmployeeId = model.EmployeeId;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteProject(int projectId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Projects
+                    .Single(e => e.ProjectId == projectId && e.OwnerId == _userId);
+
+                ctx.Projects.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

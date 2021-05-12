@@ -67,6 +67,7 @@
     <Compile Include="EmployeeListItem.cs" />
     <Compile Include="ProjectCreate.cs" />
     <Compile Include="ProjectDetail.cs" />
+    <Compile Include="ProjectEdit.cs" />
     <Compile Include="ProjectListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
